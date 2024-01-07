@@ -61,3 +61,12 @@ if __name__ == "__main__":
     print("\nOriginal Email Content:", email_content.decode('utf-8'))
     print("\nEncrypted Email Content:")
     print(encrypted_email_content.hex())
+
+     decrypted_des3_key = decrypt_with_rsa(private_key, encrypted_des3_key)
+    decrypted_email_content = decrypt_with_3des(decrypted_des3_key, encrypted_email_content)
+    
+    print("\nDecrypted Email Content:", decrypted_email_content.decode('utf-8'))
+
+
+
+
