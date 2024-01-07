@@ -28,7 +28,7 @@ def decrypt_with_rsa(private_key, encrypted_data):
 def decrypt_with_3des(key, encrypted_data):
     cipher_3des = DES3.new(key, DES3.MODE_ECB)
     decrypted_data = cipher_3des.decrypt(encrypted_data)
-    return decrypted_data.rstrip(b"\0") 
+    return decrypted_data.rstrip(b"\0") #remove padding
 if __name__ == "__main__":
     # Generate RSA key pair
     private_key, public_key = generate_rsa_key_pair()
