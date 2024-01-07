@@ -25,9 +25,39 @@ def decrypt_with_rsa(private_key, encrypted_data):
     decrypted_data = cipher_rsa.decrypt(encrypted_data)
     return decrypted_data
 
-
-
 def decrypt_with_3des(key, encrypted_data):
     cipher_3des = DES3.new(key, DES3.MODE_ECB)
     decrypted_data = cipher_3des.decrypt(encrypted_data)
     return decrypted_data.rstrip(b"\0") 
+if __name__ == "__main__":
+    # Generate RSA key pair
+    private_key, public_key = generate_rsa_key_pair()
+
+    # Generate a random 3DES key
+    des3_key = get_random_bytes(24)
+
+    # Data to be encrypted
+    email_content = b"Your sensitive email content goes here ."
+
+    # Encrypt with 3DES using the generated key
+    encrypted_email_content = encrypt_with_3des(des3_key, email_content)
+
+    # Encrypt the 3DES key with RSA public key
+    encrypted_des3_key = encrypt_with_rsa(public_key, des3_key)
+
+    # Print the keys and encrypted email
+    print("RSA Private Key:")
+    print(private_key.decode('utf-8'))
+
+    print("\nRSA Public Key:")
+    print(public_key.decode('utf-8'))
+
+    print("\n3DES Key:")
+    print(des3_key.hex())
+
+    print("\nEncrypted 3DES Key:")
+    print(encrypted_des3_key.hex())
+
+    print("\nOriginal Email Content:", email_content.decode('utf-8'))
+    print("\nEncrypted Email Content:")
+    print(encrypted_email_content.hex())
