@@ -19,3 +19,15 @@ def encrypt_with_3des(key, data):
     padded_data = data + b"\0" * (8 - len(data) % 8)  # Padding to multiple of 8 bytes
     encrypted_data = cipher_3des.encrypt(padded_data) #Encrypts the padded data using Triple DES.
     return encrypted_data
+def decrypt_with_rsa(private_key, encrypted_data):
+    key = RSA.import_key(private_key)
+    cipher_rsa = PKCS1_OAEP.new(key)
+    decrypted_data = cipher_rsa.decrypt(encrypted_data)
+    return decrypted_data
+
+
+
+def decrypt_with_3des(key, encrypted_data):
+    cipher_3des = DES3.new(key, DES3.MODE_ECB)
+    decrypted_data = cipher_3des.decrypt(encrypted_data)
+    return decrypted_data.rstrip(b"\0") 
