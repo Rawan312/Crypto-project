@@ -8,4 +8,9 @@ def generate_rsa_key_pair():
     private_key = key.export_key() #Exports the private key in PEM format
     public_key = key.publickey().export_key() #Exports the public key in PEM format.
     return private_key, public_key 
+def encrypt_with_rsa(public_key, data):
+    key = RSA.import_key(public_key)
+    cipher_rsa = PKCS1_OAEP.new(key) # Creates a new RSA encryption cipher with Optimal Asymmetric Encryption Padding
+    encrypted_data = cipher_rsa.encrypt(data)
+    return encrypted_data
 
