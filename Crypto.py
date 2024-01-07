@@ -14,3 +14,8 @@ def encrypt_with_rsa(public_key, data):
     encrypted_data = cipher_rsa.encrypt(data)
     return encrypted_data
 
+def encrypt_with_3des(key, data):
+    cipher_3des = DES3.new(key, DES3.MODE_ECB) #Creates a new Triple DES encryption cipher in Electronic Codebook (ECB) mode.
+    padded_data = data + b"\0" * (8 - len(data) % 8)  # Padding to multiple of 8 bytes
+    encrypted_data = cipher_3des.encrypt(padded_data) #Encrypts the padded data using Triple DES.
+    return encrypted_data
