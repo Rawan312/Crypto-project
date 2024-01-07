@@ -1,1 +1,1 @@
-# Crypto-project
+This repository empowers you to safeguard sensitive email content with robust encryption techniques. It leverages a powerful combination of RSA and 3DES algorithms to ensure confidentiality and privacy in your digital communications.
